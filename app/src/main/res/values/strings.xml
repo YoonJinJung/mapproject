@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">우주 위협 모니터</string>
+
+    <!-- 대시보드 -->
+    <string name="dashboard_title">소행성 모니터링 대시보드</string>
+    <string name="today_overview">오늘의 현황</string>
+    <string name="label_total_tracked">총 추적 소행성</string>
+    <string name="label_hazardous">잠재적 위험 소행성</string>
+    <string name="btn_view_asteroids">소행성 목록 보기</string>
+    <string name="btn_view_watchlist">내 관심 소행성</string>
+
+    <!-- 공통 -->
+    <string name="loading">불러오는 중…</string>
+    <string name="error_network">네트워크 오류가 발생했습니다. 연결 상태를 확인해주세요.</string>
+    <string name="error_no_data">해당 날짜의 데이터가 없습니다.</string>
+    <string name="retry">다시 시도</string>
+
+    <!-- 소행성 목록 -->
+    <string name="asteroid_list_title">지구 근처 소행성 목록</string>
+    <string name="list_empty">해당 날짜의 소행성 데이터가 없습니다.</string>
+    <string name="date_label">조회 날짜</string>
+
+    <!-- 소행성 상세 -->
+    <string name="asteroid_detail_title">소행성 상세 정보</string>
+    <string name="label_diameter">추정 직경</string>
+    <string name="label_velocity">상대 속도</string>
+    <string name="label_distance">최근접 거리</string>
+    <string name="label_approach_date">최근접 날짜</string>
+    <string name="label_orbiting_body">공전 천체</string>
+    <string name="label_magnitude">절대 등급</string>
+    <string name="status_hazardous">⚠ 잠재적 위험 천체</string>
+    <string name="status_safe">✓ 안전</string>
+    <string name="btn_add_watchlist">내 관심 목록에 추가</string>
+    <string name="btn_remove_watchlist">관심 목록에서 제거</string>
+    <string name="added_to_watchlist">관심 목록에 추가됨</string>
+    <string name="removed_from_watchlist">관심 목록에서 제거됨</string>
+    <string name="hazard_badge">⚠ 위험</string>
+
+    <!-- 관심 목록 -->
+    <string name="watchlist_title">내 관심 소행성</string>
+    <string name="watchlist_empty">관심 목록이 비어있습니다.\n소행성 상세 화면에서 \'관심 목록에 추가\'를 눌러주세요.</string>
+</resources>

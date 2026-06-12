@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Space Threat Monitor color palette -->
+    <color name="color_background">#0F1923</color>
+    <color name="color_surface">#1A2535</color>
+    <color name="color_surface_variant">#213040</color>
+    <color name="color_primary">#4FC3F7</color>
+    <color name="color_primary_dark">#0288D1</color>
+    <color name="color_on_primary">#0F1923</color>
+    <color name="color_hazardous">#FF5252</color>
+    <color name="color_safe">#69F0AE</color>
+    <color name="color_warning">#FFB300</color>
+    <color name="color_text_primary">#FFFFFF</color>
+    <color name="color_text_secondary">#90A4AE</color>
+    <color name="color_divider">#263546</color>
+</resources>

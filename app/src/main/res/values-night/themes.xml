@@ -1,0 +1,13 @@
+<resources>
+    <!-- 앱이 항상 다크 테마를 사용하므로 day/night 동일 -->
+    <style name="Theme.SpaceThreat" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+        <item name="colorSurface">@color/color_surface</item>
+        <item name="android:colorBackground">@color/color_background</item>
+        <item name="android:windowBackground">@color/color_background</item>
+        <item name="android:statusBarColor">@color/color_background</item>
+        <item name="android:navigationBarColor">@color/color_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
