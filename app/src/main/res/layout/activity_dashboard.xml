@@ -272,6 +272,105 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- 오늘의 우주 이미지 (APOD) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardApod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/color_surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 섹션 헤더 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/apod_section_title"
+                        android:textColor="@color/color_text_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="20dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="12dp" />
+
+                    <!-- 이미지 / 로딩 / 영상 안내 영역 -->
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp">
+
+                        <ImageView
+                            android:id="@+id/ivApod"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            android:contentDescription="@string/apod_section_title" />
+
+                        <ProgressBar
+                            android:id="@+id/progressApod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:indeterminateTint="@color/color_primary" />
+
+                        <TextView
+                            android:id="@+id/tvApodNotice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="20dp"
+                            android:textColor="@color/color_text_secondary"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+
+                    </FrameLayout>
+
+                    <!-- 이미지 제목 -->
+                    <TextView
+                        android:id="@+id/tvApodTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="20dp"
+                        android:paddingTop="14dp"
+                        android:paddingBottom="6dp"
+                        android:textColor="@color/color_text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <!-- 설명 (3줄 제한) -->
+                    <TextView
+                        android:id="@+id/tvApodExplanation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="20dp"
+                        android:paddingBottom="8dp"
+                        android:textColor="@color/color_text_secondary"
+                        android:textSize="13sp"
+                        android:maxLines="3"
+                        android:ellipsize="end" />
+
+                    <!-- 저작권 -->
+                    <TextView
+                        android:id="@+id/tvApodCopyright"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="20dp"
+                        android:paddingBottom="16dp"
+                        android:textColor="@color/color_text_secondary"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

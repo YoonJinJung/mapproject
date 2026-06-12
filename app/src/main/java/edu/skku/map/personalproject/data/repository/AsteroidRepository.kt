@@ -1,9 +1,11 @@
 package edu.skku.map.personalproject.data.repository
 
 import android.content.Context
+import android.graphics.Bitmap
 import edu.skku.map.personalproject.data.local.AppDatabase
 import edu.skku.map.personalproject.data.local.WatchlistEntity
 import edu.skku.map.personalproject.data.model.Asteroid
+import edu.skku.map.personalproject.data.model.ApodResponse
 import edu.skku.map.personalproject.data.model.FeedResponse
 import edu.skku.map.personalproject.data.remote.ApiService
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +26,14 @@ class AsteroidRepository(context: Context) {
     suspend fun fetchFeed(date: String? = null): FeedResponse = withContext(Dispatchers.IO) {
         val d = date ?: todayString()
         apiService.fetchFeed(d, d)
+    }
+
+    suspend fun fetchApod(): ApodResponse = withContext(Dispatchers.IO) {
+        apiService.fetchApod()
+    }
+
+    suspend fun loadApodBitmap(imageUrl: String): Bitmap? = withContext(Dispatchers.IO) {
+        apiService.loadBitmap(imageUrl)
     }
 
     fun getWatchlist(): Flow<List<WatchlistEntity>> = dao.getAll()
