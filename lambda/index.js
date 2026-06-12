@@ -4,7 +4,6 @@ REGION="ap-northeast-2"          # 서울 리전 (원하는 리전으로 변경 
 RUNTIME="nodejs18.x"
 /**
  * FUNCTION_NAME="space-threat-bff"
- * REGION="ap-northeast-2"
  * RUNTIME="nodejs24.x"
  *
  * Endpoints (query parameter 'type'로 분기):
