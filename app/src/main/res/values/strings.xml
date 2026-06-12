@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">우주 위협 모니터</string>
+    <string name="app_name">지구로 슝: 소행성 모니터링</string>
 
     <!-- 대시보드 -->
-    <string name="dashboard_title">소행성 모니터링 대시보드</string>
+    <string name="dashboard_title">지구로 슝 대시보드</string>
     <string name="today_overview">오늘의 현황</string>
     <string name="label_total_tracked">총 추적 소행성</string>
     <string name="label_hazardous">잠재적 위험 소행성</string>

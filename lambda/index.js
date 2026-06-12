@@ -1,7 +1,12 @@
 'use strict';
-
+FUNCTION_NAME="space-threat-bff"
+REGION="ap-northeast-2"          # 서울 리전 (원하는 리전으로 변경 가능)
+RUNTIME="nodejs18.x"
 /**
- * Space Threat Monitoring Dashboard - BFF Lambda
+ * FUNCTION_NAME="space-threat-bff"
+ * REGION="ap-northeast-2"
+ * RUNTIME="nodejs24.x"
+ *
  * Endpoints (query parameter 'type'로 분기):
  *   ?start_date=&end_date=          → NASA NeoWs 소행성 피드
  *   ?type=apod                      → NASA APOD (오늘의 우주 이미지)
