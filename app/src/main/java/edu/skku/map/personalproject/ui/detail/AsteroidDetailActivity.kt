@@ -29,14 +29,11 @@ class AsteroidDetailActivity : AppCompatActivity() {
         binding = ActivityAsteroidDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // GSON으로 JSON 역직렬화
         val json = intent.getStringExtra(EXTRA_ASTEROID_JSON)
         if (json == null) { finish(); return }
         asteroid = try {
             Gson().fromJson(json, Asteroid::class.java) ?: run { finish(); return }
-        } catch (e: Exception) {
-            finish(); return
-        }
+        } catch (e: Exception) { finish(); return }
 
         repository = AsteroidRepository(this)
 
@@ -87,9 +84,8 @@ class AsteroidDetailActivity : AppCompatActivity() {
 
     private fun checkWatchlistStatus() {
         lifecycleScope.launch {
-            try {
-                isInWatchlist = repository.isInWatchlist(asteroid.id)
-            } catch (_: Exception) {}
+            try { isInWatchlist = repository.isInWatchlist(asteroid.id) }
+            catch (_: Exception) {}
             updateWatchlistButton()
         }
     }
@@ -100,27 +96,18 @@ class AsteroidDetailActivity : AppCompatActivity() {
                 if (isInWatchlist) {
                     repository.removeFromWatchlist(asteroid.id)
                     isInWatchlist = false
-                    Toast.makeText(
-                        this@AsteroidDetailActivity,
-                        getString(R.string.removed_from_watchlist),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@AsteroidDetailActivity,
+                        getString(R.string.removed_from_watchlist), Toast.LENGTH_SHORT).show()
                 } else {
                     repository.addToWatchlist(asteroid)
                     isInWatchlist = true
-                    Toast.makeText(
-                        this@AsteroidDetailActivity,
-                        getString(R.string.added_to_watchlist),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@AsteroidDetailActivity,
+                        getString(R.string.added_to_watchlist), Toast.LENGTH_SHORT).show()
                 }
                 updateWatchlistButton()
             } catch (e: Exception) {
-                Toast.makeText(
-                    this@AsteroidDetailActivity,
-                    "Failed: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@AsteroidDetailActivity,
+                    "오류: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

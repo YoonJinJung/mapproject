@@ -1,8 +1,10 @@
 package edu.skku.map.personalproject.ui.dashboard
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import edu.skku.map.personalproject.R
@@ -24,6 +26,9 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
     private lateinit var repository: AsteroidRepository
 
+    // APOD 고해상도 URL (클릭 시 브라우저로 열기)
+    private var apodBrowserUrl: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
@@ -43,6 +48,11 @@ class DashboardActivity : AppCompatActivity() {
         }
         binding.btnRetry.setOnClickListener { fetchData() }
 
+        // APOD 카드 클릭 → 브라우저 열기 (Implicit Intent)
+        binding.cardApod.setOnClickListener {
+            openApodInBrowser()
+        }
+
         fetchData()
     }
 
@@ -50,7 +60,6 @@ class DashboardActivity : AppCompatActivity() {
         setLoadingState(true)
 
         lifecycleScope.launch {
-            // NeoWs + APOD 병렬 호출
             val (feedResult, apodResult) = coroutineScope {
                 val feedDeferred = async { runCatching { repository.fetchFeed() } }
                 val apodDeferred = async { runCatching { repository.fetchApod() } }
@@ -63,31 +72,44 @@ class DashboardActivity : AppCompatActivity() {
                 .onSuccess { showSummary(it) }
                 .onFailure { showError(it.message ?: getString(R.string.error_network)) }
 
-            apodResult.onSuccess { apod ->
-                binding.cardApod.visibility = View.VISIBLE
-                binding.tvApodTitle.text = apod.title
-                binding.tvApodExplanation.text = apod.explanation
-                binding.tvApodCopyright.text = apod.copyright?.let { "© $it" } ?: ""
+            apodResult.onSuccess { apod -> showApod(apod) }
+        }
+    }
 
-                if (apod.mediaType == "image" && apod.url.isNotEmpty()) {
-                    // 이미지 로드 (IO → Main)
-                    val bitmap = repository.loadApodBitmap(apod.url)
-                    binding.progressApod.visibility = View.GONE
-                    if (bitmap != null) {
-                        binding.ivApod.setImageBitmap(bitmap)
-                        binding.ivApod.visibility = View.VISIBLE
-                    } else {
-                        binding.tvApodNotice.text = getString(R.string.apod_load_error)
-                        binding.tvApodNotice.visibility = View.VISIBLE
-                    }
-                } else {
-                    // 영상 타입
-                    binding.progressApod.visibility = View.GONE
-                    binding.tvApodNotice.text = getString(R.string.apod_video_notice)
-                    binding.tvApodNotice.visibility = View.VISIBLE
-                }
+    private suspend fun showApod(apod: ApodResponse) {
+        // 브라우저에서 열 URL: hdurl(원본) 우선, 없으면 url
+        apodBrowserUrl = apod.hdurl?.takeIf { it.isNotEmpty() } ?: apod.url
+
+        binding.cardApod.visibility = View.VISIBLE
+        binding.tvApodTitle.text = apod.title
+        binding.tvApodExplanation.text = apod.explanation
+        binding.tvApodCopyright.text = apod.copyright?.let { "© $it" } ?: ""
+
+        if (apod.mediaType == "image" && apod.url.isNotEmpty()) {
+            val bitmap = repository.loadApodBitmap(apod.url)
+            binding.progressApod.visibility = View.GONE
+            if (bitmap != null) {
+                binding.ivApod.setImageBitmap(bitmap)
+                binding.ivApod.visibility = View.VISIBLE
+            } else {
+                binding.tvApodNotice.text = getString(R.string.apod_load_error)
+                binding.tvApodNotice.visibility = View.VISIBLE
             }
-            // APOD 실패 시 카드 숨김 유지 (NeoWs가 주 기능이므로 에러 표시 안 함)
+        } else {
+            binding.progressApod.visibility = View.GONE
+            binding.tvApodNotice.text = getString(R.string.apod_video_notice)
+            binding.tvApodNotice.visibility = View.VISIBLE
+        }
+    }
+
+    // ── Implicit Intent: 브라우저로 APOD 원본 이미지 열기 ─────────────────────
+    private fun openApodInBrowser() {
+        if (apodBrowserUrl.isEmpty()) return
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(apodBrowserUrl))
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(this, getString(R.string.browser_error), Toast.LENGTH_SHORT).show()
         }
     }
 

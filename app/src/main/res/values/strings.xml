@@ -36,6 +36,9 @@
     <string name="removed_from_watchlist">관심 목록에서 제거됨</string>
     <string name="hazard_badge">⚠ 위험</string>
 
+    <!-- Implicit Intent -->
+    <string name="browser_error">브라우저를 열 수 없습니다.</string>
+
     <!-- APOD -->
     <string name="apod_section_title">오늘의 우주 이미지</string>
     <string name="apod_video_notice">오늘은 영상 콘텐츠입니다.\nNASA APOD에서 확인해보세요.</string>
